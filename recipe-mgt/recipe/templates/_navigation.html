@@ -1,0 +1,82 @@
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://bulma.io">
+        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      </a>
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end">
+          <a href="{{ url_for('main.home') }}" class="navbar-item">Home</a>
+          <a href="{{ url_for('main.browse') }}" class="navbar-item">Browse Recipes</a>
+          <a href="{{ url_for('main.add') }}" class="navbar-item">Add Recipe</a>
+          
+        </div>
+        <hr class="navbar-divider">
+        <div class="navbar-end">
+              {% if current_user.is_authenticated %}
+              <!-- Show these buttons only when logged in -->
+
+                <a href="{{ url_for('main.profile') }}" class="navbar-item">             
+                  <div class="profile-container">
+                    <p class="desktop-view" style="margin-right: 10px;">Howdy, {{ current_user.username }}!</p>
+                    <img class="desktop-view" src="{{ current_user.profile_pic }}" alt="G" style="width: 32px; height: 32px; border-radius: 50%;">
+                    <p class="mobile-view">Profile</p>
+                  </div>
+                   
+                </a>
+                <a class="button is-light" href="{{ url_for('auth.logout') }}">
+                  Logout
+                </a>
+
+              
+              {% else %}
+
+              <a class="button is-primary" href="{{ url_for('auth.signup') }}">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light" href="{{ url_for('auth.login') }}">
+                Log in
+              </a>
+              {% endif %}
+              
+
+          </div>
+    </div>    
+  </nav>
+
+<script>
+  // JavaScript to toggle the navbar burger on click
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+
+        });
+      });
+    }
+
+  });
+</script>

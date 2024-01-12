@@ -1,19 +1,17 @@
-CREATE TABLE Users (
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS recipe;
+
+CREATE TABLE User (
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    password_hash VARCHAR(100) NOT NULL,
-    role ENUM('admin', 'user') DEFAULT 'user',
-    name VARCHAR(100),
+    user_role ENUM('admin', 'user') DEFAULT 'user',
     bio TEXT,
-    profile_picture_url VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    last_login TIMESTAMP,
-    -- Other preferences/settings columns...
+    profile_pic VARCHAR(255)
 );
 
 
-CREATE TABLE Recipes (
+CREATE TABLE recipe (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
     description TEXT,
